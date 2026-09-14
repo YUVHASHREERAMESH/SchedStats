@@ -12,17 +12,20 @@ A Linux kernel module that collects and analyzes real-time scheduler statistics 
 
 ## Topology / Data Flow
 
-```
-Kernel Scheduler Events
-         ↓
-   ksched_module
-   (Hook & Collect)
-         ↓
-   /proc/ksched/
-   (Export Data)
-         ↓
-   scheduler_analyzer
-   (Display & Analyze)
+```mermaid
+graph TD
+    A["🔷 Kernel Scheduler Events"] --> B["⚙️ ksched_module<br/>Hook & Collect<br/>Statistics"]
+    B --> C["📊 Kernel Memory<br/>Store Metrics"]
+    C --> D["📁 /proc/ksched/<br/>Export Data"]
+    D --> E["🖥️ scheduler_analyzer<br/>Read & Display"]
+    E --> F["📈 Analysis Results<br/>Context Switches<br/>CPU Usage<br/>Task States"]
+    
+    style A fill:#4CAF50,stroke:#2E7D32,color:#fff
+    style B fill:#2196F3,stroke:#1565C0,color:#fff
+    style C fill:#FF9800,stroke:#E65100,color:#fff
+    style D fill:#9C27B0,stroke:#6A1B9A,color:#fff
+    style E fill:#F44336,stroke:#C62828,color:#fff
+    style F fill:#00BCD4,stroke:#00838F,color:#fff
 ```
 
 ## Processing Flow
